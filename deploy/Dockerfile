@@ -2,7 +2,7 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci || npm install
+RUN npm install
 COPY . .
 # Build (Vite outputs to /dist)
 RUN npm run build
