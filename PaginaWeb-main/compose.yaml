@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  lovable_frontend:
+    image: lovable-frontend:local
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
